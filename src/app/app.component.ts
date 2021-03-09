@@ -1,12 +1,8 @@
 import { Map, View } from 'ol';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import VectorLayer from 'ol/layer/Vector';
-import VectorSource from 'ol/source/Vector';
-import { Style, Fill, Stroke, Text, Icon } from 'ol/style';
 import ImageLayer from 'ol/layer/Image';
 import Static from 'ol/source/ImageStatic';
 import { getCenter } from 'ol/extent';
-import { Circle as CircleStyle } from 'ol/style';
 
 @Component({
   selector: 'app-root',
@@ -18,15 +14,40 @@ export class AppComponent {
   title = 'deneme';
   imageLayer: ImageLayer;
   map: Map;
-  selectedType;
-  carClicked = false;
-
-  constructor() {
-  }
-
+  selected:boolean = true;
+  vehicleArray = [
+    {
+      type: "car",
+      checked: false
+    },
+    {
+      type: "truck",
+      checked: false
+    },
+    {
+      type: "van",
+      checked: false
+    },
+    {
+      type: "motorcycle",
+      checked: false
+    },
+    {
+      type: "bus",
+      checked: false
+    },
+    {
+      type: "bicycle",
+      checked: false
+    },
+    {
+      type: "person",
+      checked: false
+    }
+  ]
+  constructor() {}
   ngOnInit() {
     this.initMap();
-
   }
   initMap() {
     this.imageLayer = new ImageLayer({
@@ -52,7 +73,22 @@ export class AppComponent {
     });
   }
 
-  carSelected() {
-    this.carClicked = !this.carClicked;
+  vehicleSelected(vehicle) {
+    vehicle.checked = !vehicle.checked;
+  }
+
+  selectAll() {
+    this.vehicleArray.find(item => {
+      item.checked = true;
+      this.selected = false;
+
+    })
+  }
+  deselectAll() {
+    this.vehicleArray.find(item => {
+      item.checked = false;
+      this.selected = true;
+
+    })
   }
 }
