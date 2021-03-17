@@ -1,0 +1,13 @@
+<div class="dialog-box-container">
+    <h1 mat-dialog-title>New Line</h1>
+    <div mat-dialog-content>
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="lineName">
+        </mat-form-field>
+    </div>
+    <div class="buttons" mat-dialog-actions>
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button class="save-button" mat-button [mat-dialog-close]="lineName" cdkFocusInitial >Save</button>
+    </div>
+</div>
