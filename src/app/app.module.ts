@@ -8,12 +8,16 @@ import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
+import { TableComponent } from './table/table.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    DialogBoxComponent
+    DialogBoxComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
@@ -22,8 +26,9 @@ import {MatButtonModule} from '@angular/material/button';
     BrowserAnimationsModule,
     MatDialogModule,
     MatInputModule,
-    MatButtonModule
-    
+    MatButtonModule,
+    MatTableModule,
+    MatCheckboxModule
   ],
   providers: [    
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },

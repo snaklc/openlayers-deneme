@@ -31,9 +31,10 @@
 				</div>
 			</div>
 			<div class="button">
-				<button (newItemEvent)="drawingModeOff()"title="Draw Line" (click)="drawLine()"><img src="assets/line.svg" width="20px" height="20px">
+				<button class="add-line-button" (newItemEvent)="drawingModeOff()"title="Draw Line" (click)="drawLine()"><img src="assets/line.svg" width="20px" height="20px">
 				</button>
 			</div>
 		</div>
+		<button mat-raised-button class="direction-button" (click)="openTable()">Movements</button>
 	</div>
 </div>

@@ -8,104 +8,114 @@
   align-items: center;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   user-select: none;
-  .box{
-    width: auto;
-    height: 60vh;
-    display: flex;
+  .content{
+    display:flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
-    .map {
-      width: 100%;
-      height:100%;
-      margin-top:10vh;
-      padding: 0px;
-    }
-    .vehicle-group{
+    .box{
+      width: auto;
+      height: 60vh;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
-      min-width: 850px;
-      width: 95%;
-      height: 10vh;
-      background: #272b30;
-      border-bottom-right-radius: 30px;
-      border-bottom-left-radius: 30px;
-      padding: 1px 13px;
-      .items{
+      position: relative;
+      .map {
+        width: 100%;
+        height:100%;
+        margin-top:10vh;
+        padding: 0px;
+      }
+      .vehicle-group{
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 80%;
-        // padding: 0px 10px;
-          .vehicle{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-sizing: border-box;
-            width: auto;
-            height: 35px;
-            border: 2px solid transparent;
-            padding: 2px 8px;
-            border-radius: 50px;
-            // margin: 5px 7px 5px 0!important;
-            span{
-              color:#f8f9fa86;
-              font-size: 10.5px;
-              font-weight: bold;
-              text-transform: uppercase;
-            }
-          }
-      }
-      .deneme{
-        .select-all{
+        min-width: 850px;
+        width: 95%;
+        height: 10vh;
+        background: #272b30;
+        border-bottom-right-radius: 30px;
+        border-bottom-left-radius: 30px;
+        padding: 1px 13px;
+        .items{
           display: flex;
-          justify-content: flex-end;
+          justify-content: space-between;
           align-items: center;
-          width: 15%;
+          width: 80%;
+          // padding: 0px 10px;
             .vehicle{
               display: flex;
               align-items: center;
               justify-content: center;
-              padding: 2px 8px;
-              // margin: 5px 7px 5px 0!important;
-              border-radius: 50px;
               cursor: pointer;
               box-sizing: border-box;
               width: auto;
               height: 35px;
+              border: 2px solid transparent;
+              padding: 2px 8px;
+              border-radius: 50px;
+              // margin: 5px 7px 5px 0!important;
+              span{
+                color:#f8f9fa86;
+                font-size: 10.5px;
+                font-weight: bold;
+                text-transform: uppercase;
+              }
             }
         }
-        span{
-          padding-right: 10px;
-          color:#f8f9fa86;
-          font-size: 11px;
-          font-weight: bold;
-          cursor: pointer;
-          &:hover{
-            color: #89e031;
+        .deneme{
+          .select-all{
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            width: 15%;
+              .vehicle{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 2px 8px;
+                // margin: 5px 7px 5px 0!important;
+                border-radius: 50px;
+                cursor: pointer;
+                box-sizing: border-box;
+                width: auto;
+                height: 35px;
+              }
           }
+          span{
+            padding-right: 10px;
+            color:#f8f9fa86;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            &:hover{
+              color: #89e031;
+            }
+          }
+  
         }
-
+      }
+      .add-line-button{
+        padding: 10px;
+        font-size: 20px;
+        background: #87da35;
+        color: white;
+        outline: none;
+        border: none;
+        border-radius: 100%;
+        // padding-top: 10px;
+        position: absolute;
+        top: 125px;
+        left: -19px;
+        &:hover{
+          background: #78bb35;
+          cursor:pointer;
+        }
       }
     }
-    button{
-      padding: 10px;
-      font-size: 20px;
-      background: #87da35;
+    .direction-button{
+      background: #69a829;
+      margin-top: 20px;
       color: white;
-      outline: none;
-      border: none;
-      border-radius: 100%;
-      // padding-top: 10px;
-      position: absolute;
-      top: 125px;
-      left: -19px;
-      &:hover{
-        background: #78bb35;
-        cursor:pointer;
-      }
     }
   }
 }

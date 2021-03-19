@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 export interface ILineString{
   name: string,
-  coordinates: Array<any>
+  coordinates: Array<any>,
+  id: number
 }
 @Injectable({
   providedIn: 'root'
