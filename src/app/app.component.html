@@ -30,10 +30,12 @@
 					</ng-template>
 				</div>
 			</div>
-			<div class="button">
-				<button class="add-line-button" (newItemEvent)="drawingModeOff()"title="Draw Line" (click)="drawLine()"><img src="assets/line.svg" width="20px" height="20px">
-				</button>
-			</div>
+			<button class=" btn add-line-button" (newItemEvent)="drawingModeOff()" title="Draw Line"
+				(click)="drawLine()"><img src="assets/diagonal-line.svg" width="20px" height="20px">
+			</button>
+			<button class="btn modify-button" (newItemEvent)="drawingModeOff()" title="Modify Line"
+				(click)="modifyLine()"><img src="assets/line.svg" width="20px" height="20px">
+			</button>
 		</div>
 		<button mat-raised-button class="direction-button" (click)="openTable()">Movements</button>
 	</div>

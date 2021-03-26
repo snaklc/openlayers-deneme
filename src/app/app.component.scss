@@ -94,7 +94,7 @@
   
         }
       }
-      .add-line-button{
+      .btn{
         padding: 10px;
         font-size: 20px;
         background: #87da35;
@@ -103,12 +103,23 @@
         border: none;
         border-radius: 100%;
         // padding-top: 10px;
-        position: absolute;
-        top: 125px;
-        left: -19px;
         &:hover{
           background: #78bb35;
           cursor:pointer;
+        }
+      }
+      .add-line-button{
+        position: absolute;
+        top: 115px;
+        left: -19px;
+      }
+      .modify-button{
+        position: absolute;
+        top: 175px;
+        left: -19px;
+        background: #ffcc33;
+        &:hover{
+          background: #e7b318;
         }
       }
     }

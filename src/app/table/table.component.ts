@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-export interface PeriodicElement {
-  position: string;
+export interface IColumName {
   name: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
+const columnNames: IColumName[] = [
   // {position: 'start-finish', name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 'NB',name: 'NB'},
-  {position: 'EB', name: 'EB'},
-  {position: 'WB',name: 'WB'},
-  {position: 'SB',name: 'SB'},
-  
+  { name: 'NB' },
+  { name: 'EB' },
+  { name: 'WB' },
+  { name: 'SB' },
+
 ];
 @Component({
   selector: 'app-table',
@@ -18,8 +17,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
-  displayedColumns: string[] = ['S/F','NB', 'EB', 'WB', 'SB'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['S/F', 'NB', 'EB', 'WB', 'SB'];
+  dataSource = columnNames;
   color = "black";
   constructor() { }
 
