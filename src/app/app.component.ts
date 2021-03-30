@@ -68,6 +68,7 @@ export class AppComponent {
   lineObj;
   counter: number = 1;
   modifiedCoordinate;
+  movementsArray = [];
   constructor(public dialog: MatDialog, private dataService: DataService) { }
 
   ngOnInit() {
@@ -127,9 +128,6 @@ export class AppComponent {
         center: getCenter(extent),
       }),
     });
-
-
-
   }
   /**
    * Line çizmeye yarayan fonksiyon
@@ -244,14 +242,19 @@ export class AppComponent {
       this.map.addInteraction(this.modify);
       this.modify.on('modifyend', (event) => {
         //modified feature'ın koordinatları
-        const modifiedItemId = event.features.item(0).getId();
-        const newCoord = event.features.item(0).getGeometry().getCoordinates();
-        // DataServiste coordinatları güncelledik.
-        this.dataService.lines.map((findedLine) => {
-          if (findedLine.id === modifiedItemId) {
-            findedLine.coordinates = newCoord;
-          }
-        })
+        if(event.features.item(0) !== undefined){
+          const modifiedItemId = event.features.item(0).getId();
+          const newCoord = event.features.item(0).getGeometry().getCoordinates();
+          // DataServiste coordinatları güncelledik.
+          this.dataService.lines.map((findedLine) => {
+            if (findedLine.id === modifiedItemId) {
+              findedLine.coordinates = newCoord;
+            }
+          })
+        }
+        else{
+          console.log('Vertexler modify edilemez!!')
+        }
       });
     }
     else {
@@ -274,7 +277,9 @@ export class AppComponent {
       // data: { name: this.lineName }
     });
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('table result', result)
+      if (result) {
+        this.movementsArray = result
+      }
     });
   }
   drawingModeOff() {

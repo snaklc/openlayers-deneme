@@ -38,5 +38,10 @@
 			</button>
 		</div>
 		<button mat-raised-button class="direction-button" (click)="openTable()">Movements</button>
+		<div style="margin-top: 10px">
+			<ng-container class="movss" *ngFor="let movs of movementsArray">
+				<p class="movements">{{movs.startPoint}}  -->  {{movs.endPoint}}</p>
+			</ng-container>
+		</div>
 	</div>
 </div>
