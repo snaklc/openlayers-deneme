@@ -12,7 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 import Text from 'ol/style/Text';
 import GeoJSON from 'ol/format/GeoJSON';
-import { DataService, ILineString } from './data.service';
+import { DataService, ILineString } from './services/data.service';
 import { TableComponent } from './table/table.component';
 import Select from 'ol/interaction/Select';
 
@@ -27,36 +27,6 @@ export class AppComponent {
   imageLayer: ImageLayer;
   map: Map;
   selected: boolean = true;
-  vehicleArray = [
-    {
-      type: "car",
-      checked: false
-    },
-    {
-      type: "truck",
-      checked: false
-    },
-    {
-      type: "van",
-      checked: false
-    },
-    {
-      type: "motorcycle",
-      checked: false
-    },
-    {
-      type: "bus",
-      checked: false
-    },
-    {
-      type: "bicycle",
-      checked: false
-    },
-    {
-      type: "person",
-      checked: false
-    }
-  ]
   source;
   vector;
   draw;
@@ -68,11 +38,13 @@ export class AppComponent {
   lineObj;
   counter: number = 1;
   modifiedCoordinate;
+  vehicleArray = [];
   movementsArray = [];
   constructor(public dialog: MatDialog, private dataService: DataService) { }
 
   ngOnInit() {
     this.initMap();
+    this.vehicleArray = this.dataService.vehicleArray
   }
   /**
    * Harita ve katmanlarının oluşturulduğu fonksiyon
