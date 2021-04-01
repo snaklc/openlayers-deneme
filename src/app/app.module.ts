@@ -14,6 +14,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import { VehicleTypeComponent } from './vehicle-type/vehicle-type.component';
+import { MapComponent } from './map/map.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { VehicleTypeComponent } from './vehicle-type/vehicle-type.component';
     AppComponent,
     DialogBoxComponent,
     TableComponent,
-    VehicleTypeComponent
+    VehicleTypeComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,

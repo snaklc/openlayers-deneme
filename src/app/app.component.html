@@ -1,42 +1,10 @@
 <div class="container">
 	<div class="content">
 		<div class="box">
-			<div #map class="map"></div>
-			<!-- <div class="vehicle-group">
-				<div class="items">
-					<div (click)="vehicleSelected(vehicle)" class="vehicle" *ngFor="let vehicle of vehicleArray"
-						[ngClass]="vehicle.checked===true ? 'clicked-' + vehicle.type : ''">
-						<div *ngIf="!vehicle.checked">
-							<img src="assets/{{vehicle.type}}-faded.svg" width="20px" height="20px"
-								style="padding-right: 10px;">
-						</div>
-						<div *ngIf="vehicle.checked">
-							<img src="assets/{{vehicle.type}}.svg" width="20px" height="20px"
-								style="padding-right: 10px;">
-						</div>
-						<span class="vehicle-text">{{vehicle.type}}</span>
-					</div>
-				</div>
-				<div class="deneme">
-					<ng-container class="select-all" *ngIf="selected; else deselect">
-						<div class="vehicle" (click)="selectAll()">
-							<span>SELECT ALL</span>
-						</div>
-					</ng-container>
-					<ng-template class="deselect-all" #deselect>
-						<div class="vehicle" (click)="deselectAll()">
-							<span class="text">DESELECT ALL</span>
-						</div>
-					</ng-template>
-				</div>
-			</div> -->
+			<!-- <div #map class="map"></div> -->
+			<app-map class="map"></app-map>
 			<app-vehicle-type></app-vehicle-type>
-			<button class=" btn add-line-button" (newItemEvent)="drawingModeOff()" title="Draw Line"
-				(click)="drawLine()"><img src="assets/diagonal-line.svg" width="20px" height="20px">
-			</button>
-			<button class="btn modify-button" (newItemEvent)="drawingModeOff()" title="Modify Line"
-				(click)="modifyLine()"><img src="assets/line.svg" width="20px" height="20px">
-			</button>
+			
 		</div>
 		<button mat-raised-button class="direction-button" (click)="openTable()">Movements</button>
 		<div style="margin-top: 10px">
