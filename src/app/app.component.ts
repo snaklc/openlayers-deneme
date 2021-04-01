@@ -38,13 +38,11 @@ export class AppComponent {
   lineObj;
   counter: number = 1;
   modifiedCoordinate;
-  vehicleArray = [];
   movementsArray = [];
   constructor(public dialog: MatDialog, private dataService: DataService) { }
 
   ngOnInit() {
     this.initMap();
-    this.vehicleArray = this.dataService.vehicleArray
   }
   /**
    * Harita ve katmanlarının oluşturulduğu fonksiyon
@@ -259,21 +257,5 @@ export class AppComponent {
   }
   modifyModeOff() {
     this.map.removeInteraction(this.modify);
-
-  }
-  vehicleSelected(vehicle) {
-    vehicle.checked = !vehicle.checked;
-  }
-  selectAll() {
-    this.vehicleArray.find(item => {
-      item.checked = true;
-      this.selected = false;
-    })
-  }
-  deselectAll() {
-    this.vehicleArray.find(item => {
-      item.checked = false;
-      this.selected = true;
-    })
   }
 }

@@ -13,13 +13,15 @@ import { TableComponent } from './table/table.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
+import { VehicleTypeComponent } from './vehicle-type/vehicle-type.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     DialogBoxComponent,
-    TableComponent
+    TableComponent,
+    VehicleTypeComponent
   ],
   imports: [
     BrowserModule,

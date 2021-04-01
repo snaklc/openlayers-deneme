@@ -1,0 +1,28 @@
+<div class="vehicle-group">
+    <div class="items">
+        <div (click)="vehicleSelected(vehicle)" class="vehicle" *ngFor="let vehicle of vehicleArray"
+            [ngClass]="vehicle.checked===true ? 'clicked-' + vehicle.type : ''">
+            <div *ngIf="!vehicle.checked">
+                <img src="assets/{{vehicle.type}}-faded.svg" width="20px" height="20px"
+                    style="padding-right: 10px;">
+            </div>
+            <div *ngIf="vehicle.checked">
+                <img src="assets/{{vehicle.type}}.svg" width="20px" height="20px"
+                    style="padding-right: 10px;">
+            </div>
+            <span class="vehicle-text">{{vehicle.type}}</span>
+        </div>
+    </div>
+    <div class="deneme">
+        <ng-container class="select-all" *ngIf="selected; else deselect">
+            <div class="vehicle" (click)="selectAll()">
+                <span>SELECT ALL</span>
+            </div>
+        </ng-container>
+        <ng-template class="deselect-all" #deselect>
+            <div class="vehicle" (click)="deselectAll()">
+                <span class="text">DESELECT ALL</span>
+            </div>
+        </ng-template>
+    </div>
+</div>

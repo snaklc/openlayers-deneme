@@ -1,6 +1,5 @@
 <div class="dialog-container">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        <!-- Position Column -->
         <ng-container matColumnDef="S/F">
             <th mat-header-cell *matHeaderCellDef>
                 <div class="finish" style="padding-bottom: 3px;">FINISH<span><img width="12px" height="12px"
@@ -10,41 +9,23 @@
             </th>
             <td mat-cell *matCellDef="let element"> {{element.name}} </td>
         </ng-container>
-
-        <ng-container matColumnDef="NB">
-            <th mat-header-cell *matHeaderCellDef> NB </th>
-            <td mat-cell *matCellDef="let element">
-                <mat-checkbox  (change)="onChecked($event, element,'NB')"
-                    class="custom-frame" color="primary"></mat-checkbox>
-            </td>
-        </ng-container>
-
-        <ng-container matColumnDef="EB">
-            <th mat-header-cell *matHeaderCellDef> EB </th>
-            <td mat-cell *matCellDef="let element">
-                <mat-checkbox (change)="onChecked($event, element,'EB')" color="primary"></mat-checkbox>
-            </td>
-        </ng-container>
-
-        <ng-container matColumnDef="WB">
-            <th mat-header-cell *matHeaderCellDef> WB </th>
-            <td mat-cell *matCellDef="let element">
-                <mat-checkbox (change)="onChecked($event, element,'WB')" color="primary"></mat-checkbox>
-            </td>
-        </ng-container>
-
-        <ng-container matColumnDef="SB">
-            <th mat-header-cell *matHeaderCellDef> SB </th>
-            <td mat-cell *matCellDef="let element">
-                <mat-checkbox (change)="onChecked($event, element,'SB')" color="primary"></mat-checkbox>
-            </td>
-        </ng-container>
+        <div *ngFor="let column of dataSource">
+            <ng-container matColumnDef="{{column.name}}">
+                <th mat-header-cell *matHeaderCellDef> {{column.name}} </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-checkbox (change)="onChecked($event, element,column.name)" class="custom-frame"
+                        color="primary">
+                    </mat-checkbox>
+                </td>
+            </ng-container>
+        </div>
+        
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     <div class="buttons">
-        <button class="cancel" mat-button  mat-dialog-close>Cancel</button>
-        <button class="save" mat-button  [mat-dialog-close]="movementsArray">Save</button>
+        <button class="cancel" mat-button mat-dialog-close>Cancel</button>
+        <button class="save" mat-button [mat-dialog-close]="movementsArray">Save</button>
     </div>
 </div>

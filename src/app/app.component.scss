@@ -26,75 +26,6 @@
         margin-top:10vh;
         padding: 0px;
       }
-      .vehicle-group{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        min-width: 850px;
-        width: 95%;
-        height: 10vh;
-        background: #272b30;
-        border-bottom-right-radius: 30px;
-        border-bottom-left-radius: 30px;
-        padding: 1px 13px;
-        .items{
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          width: 80%;
-          // padding: 0px 10px;
-            .vehicle{
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              cursor: pointer;
-              box-sizing: border-box;
-              width: auto;
-              height: 35px;
-              border: 2px solid transparent;
-              padding: 2px 8px;
-              border-radius: 50px;
-              // margin: 5px 7px 5px 0!important;
-              span{
-                color:#f8f9fa86;
-                font-size: 10.5px;
-                font-weight: bold;
-                text-transform: uppercase;
-              }
-            }
-        }
-        .deneme{
-          .select-all{
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            width: 15%;
-              .vehicle{
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 2px 8px;
-                // margin: 5px 7px 5px 0!important;
-                border-radius: 50px;
-                cursor: pointer;
-                box-sizing: border-box;
-                width: auto;
-                height: 35px;
-              }
-          }
-          span{
-            padding-right: 10px;
-            color:#f8f9fa86;
-            font-size: 11px;
-            font-weight: bold;
-            cursor: pointer;
-            &:hover{
-              color: #89e031;
-            }
-          }
-  
-        }
-      }
       .btn{
         padding: 10px;
         background: #87da35;
@@ -102,7 +33,6 @@
         outline: none;
         border: none;
         border-radius: 100%;
-        // padding-top: 10px;
         &:hover{
           background: #78bb35;
           cursor:pointer;
@@ -115,7 +45,7 @@
       }
       .modify-button{
         position: absolute;
-        top: 175px;
+        top: 170px;
         left: -19px;
         background: #ffcc33;
         &:hover{
@@ -133,7 +63,7 @@
       color: white;
       border: 2px solid white;
       border-radius: 30px;
-      width: 100px;
+      width: auto;
       height: auto;
       text-align: center;
       &:hover{
@@ -143,45 +73,4 @@
     }
   }
 }
-.clicked-car{
-  border: 2px solid rgb(36, 163, 36) !important;
-  span{
-    color: white !important;
-  }
-}
-.clicked-truck{
-  border: 2px solid rgb(226, 223, 60) !important;
-  span{
-    color: white !important;
-  }
-}
-.clicked-van{
-  border: 2px solid rgb(131, 53, 233) !important;
-  span{
-    color: white !important;
-  }
-}
-.clicked-motorcycle{
-  border: 2px solid rgb(233, 100, 59) !important;
-  span{
-    color: white !important;
-  }
-}
-.clicked-bus{
-  border: 2px solid rgb(58, 121, 238) !important;
-  span{
-    color: white !important;
-  }
-}
-.clicked-bicycle{
-  border: 2px solid rgb(253, 35, 35) !important;
-  span{
-    color: white !important;
-  }
-}
-.clicked-person{
-  border: 2px solid rgb(206, 61, 199) !important;
-  span{
-    color: white !important;
-  }
-}
+

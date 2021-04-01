@@ -1,9 +1,10 @@
 import { getInterpolationArgsLength } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
-export interface IColumn {
+import { DataService } from '../services/data.service';
+export interface IRow {
   name: string;
 }
-const ELEMENT_DATA: IColumn[] = [
+const ELEMENT_ROW_DATA: IRow[] = [
   { name: 'NB' },
   { name: 'EB' },
   { name: 'WB' },
@@ -16,17 +17,34 @@ const ELEMENT_DATA: IColumn[] = [
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
+  rows = [];
   movementsArray = [];
+  dataSource;
   movementObj = { checked: false, startPoint: "", endPoint: "" };
-  displayedColumns: string[] = ['S/F', 'NB', 'EB', 'WB', 'SB'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ["S/F"];
+  // dataSource = ELEMENT_ROW_DATA;
   color = "black";
-  constructor() { }
+  constructor(private dataService: DataService) {
+    this.dataService.lines.find((line)=>{
+      const rowNames = {
+        name: line.name
+      }
+      this.rows.push(rowNames)
+      console.log('rowNames', rowNames)
+      this.dataSource = this.rows;
+      console.log('dataSource', this.dataSource)
+      this.displayedColumns.push(rowNames.name)
+      console.log('displayColum', this.displayedColumns)
+
+
+    })
+   }
 
   ngOnInit(): void {
   }
 
   onChecked(event, baslangic, bitis) {
+    console.log(event,baslangic,bitis)
     this.movementObj = {
       checked: event.checked,
       startPoint: baslangic.name,
@@ -39,14 +57,14 @@ export class TableComponent implements OnInit {
     })
     if (findObj) {
       findObj.checked = this.movementObj.checked;
-      this.movementsArray = this.getFilteredMovements(this.movementsArray)
-      console.log('movements array', this.movementsArray)
     }
     else {
       this.movementsArray.push(this.movementObj)
-      this.movementsArray = this.getFilteredMovements(this.movementsArray)
-      console.log('movements array', this.movementsArray)
     }
+    this.movementsArray = this.getFilteredMovements(this.movementsArray)
+    console.log('movements array', this.movementsArray)
+
+
   }
 
   getFilteredMovements(arr) {
