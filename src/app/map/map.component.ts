@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Map, View } from 'ol';
 import VectorLayer from 'ol/layer/Vector';
 import ImageLayer from 'ol/layer/Image';
@@ -38,7 +38,9 @@ export class MapComponent implements OnInit {
   counter: number = 1;
   modifiedCoordinate;
   constructor(public dialog: MatDialog, private dataService: DataService) { }
-
+  @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+    this.drawingModeOff();
+}
   ngOnInit(): void {
     this.initMap();
 
@@ -111,6 +113,7 @@ export class MapComponent implements OnInit {
       this.map.addInteraction(this.draw);
       // Çizim tamamlandıktan sonrası
       this.draw.on('drawend', (arg) => {
+        this.drawingModeOff();
         //koordinat bilgisi
         let parser = new GeoJSON();
         this.coordinates = parser.writeFeatureObject(arg.feature);
@@ -238,8 +241,11 @@ export class MapComponent implements OnInit {
   }
   drawingModeOff() {
     this.map.removeInteraction(this.draw);
+    this.drawMode = false;
+
   }
   modifyModeOff() {
     this.map.removeInteraction(this.modify);
+    this.modifyMode = false;
   }
 }

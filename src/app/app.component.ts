@@ -1,31 +1,16 @@
-import { Map, View } from 'ol';
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import VectorLayer from 'ol/layer/Vector';
+import { Component } from '@angular/core';
 import ImageLayer from 'ol/layer/Image';
-import ImageStatic from 'ol/source/ImageStatic';
-import { getCenter } from 'ol/extent';
-import Projection from 'ol/proj/Projection';
-import { Vector as VectorSource } from 'ol/source';
-import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style';
-import { Draw, Modify } from 'ol/interaction';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogBoxComponent } from './dialog-box/dialog-box.component';
-import Text from 'ol/style/Text';
-import GeoJSON from 'ol/format/GeoJSON';
-import { DataService, ILineString } from './services/data.service';
+import { DataService } from './services/data.service';
 import { TableComponent } from './table/table.component';
-import Select from 'ol/interaction/Select';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  // @ViewChild('map', { static: true }) mapRef: ElementRef;
   title = 'deneme';
   imageLayer: ImageLayer;
-  map: Map;
   selected: boolean = true;
   source;
   vector;
