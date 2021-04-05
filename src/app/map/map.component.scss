@@ -23,15 +23,16 @@
   outline: none;
   border: none;
   border-radius: 100%;
-  &:hover{
-    background: #78bb35;
-    cursor:pointer;
-  }
+  
 }
 .add-line-button{
   position: absolute;
   top: 45px;
   left: -19px;
+  &:hover{
+    background: #78bb35;
+    cursor:pointer;
+  }
 }
 .modify-button{
   position: absolute;
@@ -40,5 +41,6 @@
   background: #ffcc33;
   &:hover{
     background: #e7b318;
+    cursor:pointer;
   }
 }

@@ -40,7 +40,8 @@ export class MapComponent implements OnInit {
   constructor(public dialog: MatDialog, private dataService: DataService) { }
   @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
     this.drawingModeOff();
-}
+    this.modifyModeOff();
+  }
   ngOnInit(): void {
     this.initMap();
 
@@ -211,7 +212,7 @@ export class MapComponent implements OnInit {
       this.map.addInteraction(this.modify);
       this.modify.on('modifyend', (event) => {
         //modified feature'ın koordinatları
-        if(event.features.item(0) !== undefined){
+        if (event.features.item(0) !== undefined) {
           const modifiedItemId = event.features.item(0).getId();
           const newCoord = event.features.item(0).getGeometry().getCoordinates();
           // DataServiste coordinatları güncelledik.
@@ -221,7 +222,7 @@ export class MapComponent implements OnInit {
             }
           })
         }
-        else{
+        else {
           console.log('Vertexler modify edilemez!!')
         }
       });

@@ -1,10 +1,14 @@
-<div class="draw-line-message"*ngIf="drawMode">
-      Draw a line
+<div class="draw-line-message" *ngIf="drawMode">
+        Draw a line
+</div>
+<div class="draw-line-message" *ngIf="modifyMode">
+        Modify a line
 </div>
 <div #map class="map"></div>
-<button *ngIf="!drawMode" class=" btn add-line-button" (newItemEvent)="drawingModeOff()" title="Draw Line" (click)="drawLine()"><img
-        src="assets/diagonal-line.svg" width="20px" height="20px">
+<button *ngIf="drawMode === false && modifyMode === false" class=" btn add-line-button"
+        (newItemEvent)="drawingModeOff()" title="Draw Line" (click)="drawLine()"><img src="assets/diagonal-line.svg"
+                width="20px" height="20px">
 </button>
-<button *ngIf="!drawMode" class="btn modify-button" (newItemEvent)="drawingModeOff()" title="Modify Line" (click)="modifyLine()"><img
-        src="assets/line.svg" width="20px" height="20px">
+<button *ngIf="drawMode === false && modifyMode === false" class="btn modify-button" (newItemEvent)="drawingModeOff()"
+        title="Modify Line" (click)="modifyLine()"><img src="assets/line.svg" width="20px" height="20px">
 </button>
