@@ -34,13 +34,23 @@
     cursor:pointer;
   }
 }
-.modify-button{
+.delete-button{
   position: absolute;
   top: 100px;
-  left: -19px;
-  background: #ffcc33;
+  right: -20px;
+  background: rgb(214, 49, 49);
   &:hover{
-    background: #e7b318;
+    background: #df1313;
     cursor:pointer;
   }
 }
+// .modify-button{
+//   position: absolute;
+//   top: 100px;
+//   left: -19px;
+//   background: #ffcc33;
+//   &:hover{
+//     background: #e7b318;
+//     cursor:pointer;
+//   }
+// }

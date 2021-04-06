@@ -1,5 +1,6 @@
 import { getInterpolationArgsLength } from '@angular/compiler/src/render3/view/util';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MapComponent } from '../map/map.component';
 import { DataService } from '../services/data.service';
 export interface IRow {
   name: string;
@@ -17,6 +18,8 @@ const ELEMENT_ROW_DATA: IRow[] = [
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
+  @ViewChild(MapComponent)
+  mapComponent: MapComponent;
   rows = [];
   movementsArray = [];
   dataSource;
@@ -25,7 +28,7 @@ export class TableComponent implements OnInit {
   // dataSource = ELEMENT_ROW_DATA;
   color = "black";
   constructor(private dataService: DataService) {
-    this.dataService.lines.find((line)=>{
+    this.dataService.lines.find((line) => {
       const rowNames = {
         name: line.name
       }
@@ -38,13 +41,14 @@ export class TableComponent implements OnInit {
 
 
     })
-   }
+  }
 
   ngOnInit(): void {
+    // console.log('map', this.mapComponent.linesArray)
   }
 
   onChecked(event, baslangic, bitis) {
-    console.log(event,baslangic,bitis)
+    console.log(event, baslangic, bitis)
     this.movementObj = {
       checked: event.checked,
       startPoint: baslangic.name,

@@ -15,6 +15,7 @@ import Select from 'ol/interaction/Select';
 import { ElementRef } from '@angular/core';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { DataService } from '../services/data.service';
+import { doubleClick } from 'ol/events/condition';
 
 @Component({
   selector: 'app-map',
@@ -37,7 +38,11 @@ export class MapComponent implements OnInit {
   lineObj;
   counter: number = 1;
   modifiedCoordinate;
-  constructor(public dialog: MatDialog, private dataService: DataService) { }
+  select;
+  linesArray = [];
+  constructor(public dialog: MatDialog, private dataService: DataService) {
+    this.linesArray = dataService.lines;
+  }
   @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
     this.drawingModeOff();
     this.modifyModeOff();
@@ -97,6 +102,31 @@ export class MapComponent implements OnInit {
         center: getCenter(extent),
       }),
     });
+
+    // Lineları click ile seçmek ve modify etmek için
+    var selectClick = new Select({
+      condition: doubleClick,
+    });
+
+    this.select = selectClick; // ref to currently selected interaction
+    console.log('selectType', this.select)
+    if (this.select !== null) {
+      this.map.addInteraction(this.select);
+      this.select.on('select', (e) => {
+        if (e.selected.id_ !== null) {
+          this.modifyLine();
+        }
+        console.log('select', e)
+        return e.selected;
+      });
+    }
+    else {
+      this.modifyModeOff();
+      // this.deleteModeOff();
+      this.map.removeInteraction(this.select)
+      console.log(this.linesArray)
+
+    }
   }
   /**
    * Line çizmeye yarayan fonksiyon
@@ -160,8 +190,8 @@ export class MapComponent implements OnInit {
             coordinates: this.coordinates.geometry.coordinates,
             id: feature.getId()
           }
-          this.dataService.lines.push(this.lineObj)
-          console.log(this.dataService.lines)
+          this.linesArray.push(this.lineObj)
+          console.log(this.linesArray)
 
         });
       })
@@ -216,7 +246,7 @@ export class MapComponent implements OnInit {
           const modifiedItemId = event.features.item(0).getId();
           const newCoord = event.features.item(0).getGeometry().getCoordinates();
           // DataServiste coordinatları güncelledik.
-          this.dataService.lines.map((findedLine) => {
+          this.linesArray.map((findedLine) => {
             if (findedLine.id === modifiedItemId) {
               findedLine.coordinates = newCoord;
             }
@@ -230,6 +260,26 @@ export class MapComponent implements OnInit {
     else {
       this.modifyModeOff();
     }
+  }
+  deleteLine() {
+    let selectedLine = this.select.features_.array_;
+    let selectedLineId = selectedLine[0].getId();
+    if (selectedLine !== null) {
+      let features = this.source.getFeatures();
+      if (features != null && features.length > 0) {
+        features.forEach(element => {
+          if (element.getId() === selectedLineId) {
+            //line'ı mapten kaldır
+            this.source.removeFeature(element);
+            //line'ı dataserviceten sil
+            this.linesArray = this.filterArrays(this.linesArray, selectedLineId)
+          }
+        });
+      }
+    }
+  }
+  filterArrays(arr, selectedLineId) {
+    return arr.filter(f => f.id !== selectedLineId)
   }
   async openPopup() {
     const dialogRef = this.dialog.open(DialogBoxComponent, {
