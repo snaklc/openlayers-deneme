@@ -1,13 +1,16 @@
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side" position="end">
-        <p>Auto-resizing sidenav</p>
-        <p>Lorem, ipsum dolor sit amet consectetur.</p>
-        <button mat-button class="direction-button" (click)="openTable()">Movements</button>
+        <p>Directions</p>
+        <div class="btns">
+            <button mat-raised-button class="direction-button" (click)="openTable()">Cross Directons</button> &nbsp;
+            <button mat-raised-button class="direction-button" (click)="openTable()">Add New Cross</button>
+        </div>
     </mat-drawer>
 
     <div class="example-sidenav-content">
         <button type="button" mat-button (click)="drawer.toggle()">
-            Directions
+            <img src="assets/shuffle.svg">
+            &nbsp;Directions
         </button>
 
     </div>

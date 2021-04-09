@@ -9,12 +9,13 @@ import { TableComponent } from '../table/table.component';
 })
 export class SidenavComponent implements OnInit {
   movementsArray = [];
+  directions = true;
 
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
-  showFiller = false;
+  showBorder = false;
   openTable() {
     const dialogRef = this.dialog.open(TableComponent, {
       width: '450px',

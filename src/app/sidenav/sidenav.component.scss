@@ -11,7 +11,7 @@
     justify-content: center;
     position: absolute;
     top: 40px;
-    right: -30px;
+    right: -42px;
     transform: rotate(90deg);
 
     button{
@@ -19,18 +19,26 @@
         background: #3e454d;
         outline: none;
         border: none;
-        &:focus{
-            background:#3e454d;
+        border-bottom: 3px solid transparent;
+        &:hover{
+            border-bottom: 3px solid #69a829;
         }
     }
   }
   
   .example-sidenav {
-    background: #3e454d;
-    color: white;
-    padding: 20px;
-    button{
-        color:green;
-        border-radius: 50%;
-    }
+      background: #3e454d;
+      color: white;
+      padding: 20px;
+      box-shadow: none;
+      border: none;
+      button{
+          color:white;
+          background: #353b42;
+         border-radius: 10px;
+       }
+   }
+
+  .add-border{
+    border-bottom: 3px solid #69a829;
   }
