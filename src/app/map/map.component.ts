@@ -33,6 +33,7 @@ export class MapComponent implements OnInit {
   modify;
   drawMode = false;
   modifyMode = false;
+  lineCounter = 1;
   defaultlineName = 'line';
   coordinates;
   lineObj;
@@ -72,6 +73,18 @@ export class MapComponent implements OnInit {
     this.vector = new VectorLayer({
       source: this.source,
       style: new Style({
+        // text: new Text({
+        //   text: this.defaultlineName + this.lineCounter,
+        //   scale: 1.5,
+        //   font: 'Verdana',
+        //   padding: [-5, 5, -5, 8],
+        //   fill: new Fill({
+        //     color: 'green',
+        //   }),
+        //   backgroundFill: new Fill({
+        //     color: 'white'
+        //   }),
+        // }),
         fill: new Fill({
           color: 'rgba(255, 255, 255, 0.2)',
         }),
@@ -153,45 +166,50 @@ export class MapComponent implements OnInit {
         feature.setId(this.counter++)
         //text bilgisini style'a ekledik
         this.openPopup().then((res) => {
-          const style = new Style({
-            text: new Text({
-              text: res,
-              scale: 1.5,
-              font: 'Verdana',
-              padding: [-5, 5, -5, 8],
-              fill: new Fill({
-                color: 'green',
+          if (res) {
+            const style = new Style({
+              text: new Text({
+                text: res,
+                scale: 1.5,
+                font: 'Verdana',
+                padding: [-5, 5, -5, 8],
+                fill: new Fill({
+                  color: 'green',
 
+                }),
+                backgroundFill: new Fill({
+                  color: 'white'
+                }),
               }),
-              backgroundFill: new Fill({
-                color: 'white'
-              }),
-            }),
-            fill: new Fill({
-              color: 'rgba(255, 255, 255, 0.2)',
-            }),
-            stroke: new Stroke({
-              color: 'white',
-              width: 5,
-            }),
-            image: new CircleStyle({
-              radius: 7,
               fill: new Fill({
-                color: '#87da35',
+                color: 'rgba(255, 255, 255, 0.2)',
               }),
-            }),
-          });
-          feature.setStyle(style)
-          feature.set('name', res)
-          console.log('feature', feature.values_.name)
-          // Dataservice'e eklenecek olan linestring objesi
-          this.lineObj = {
-            name: feature.values_.name,
-            coordinates: this.coordinates.geometry.coordinates,
-            id: feature.getId()
+              stroke: new Stroke({
+                color: 'white',
+                width: 5,
+              }),
+              image: new CircleStyle({
+                radius: 7,
+                fill: new Fill({
+                  color: '#87da35',
+                }),
+              }),
+            });
+            feature.setStyle(style)
+            feature.set('name', res)
+            console.log('featureName', feature.values_.name)
+            // Dataservice'e eklenecek olan linestring objesi
+            this.lineObj = {
+              name: feature.values_.name,
+              coordinates: this.coordinates.geometry.coordinates,
+              id: feature.getId()
+            }
+            this.linesArray.push(this.lineObj)
+            console.log(this.linesArray)
           }
-          this.linesArray.push(this.lineObj)
-          console.log(this.linesArray)
+          else {
+
+          }
 
         });
       })
