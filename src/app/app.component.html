@@ -1,16 +1,16 @@
 <div class="container">
 	<div class="content">
 		<div class="box">
-			<!-- <div #map class="map"></div> -->
 			<app-map class="map"></app-map>
 			<app-vehicle-type></app-vehicle-type>
-			
+
 		</div>
-		<button mat-raised-button class="direction-button" (click)="openTable()">Movements</button>
+		<!-- <button mat-raised-button class="direction-button" (click)="openTable()">Movements</button> -->
 		<div style="margin-top: 10px">
 			<ng-container class="movss" *ngFor="let movs of movementsArray">
-				<p class="movements">{{movs.startPoint}}  -->  {{movs.endPoint}}</p>
+				<p class="movements">{{movs.startPoint}} -> {{movs.endPoint}}</p>
 			</ng-container>
 		</div>
 	</div>
+	<app-sidenav></app-sidenav>
 </div>

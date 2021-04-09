@@ -115,7 +115,6 @@ export class MapComponent implements OnInit {
         center: getCenter(extent),
       }),
     });
-
     // Lineları click ile seçmek ve modify etmek için
     var selectClick = new Select({
       condition: doubleClick,
@@ -138,7 +137,6 @@ export class MapComponent implements OnInit {
       // this.deleteModeOff();
       this.map.removeInteraction(this.select)
       console.log(this.linesArray)
-
     }
   }
   /**
@@ -210,7 +208,6 @@ export class MapComponent implements OnInit {
           else {
 
           }
-
         });
       })
     }

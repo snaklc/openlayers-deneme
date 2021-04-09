@@ -1,0 +1,15 @@
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side" position="end">
+        <p>Auto-resizing sidenav</p>
+        <p>Lorem, ipsum dolor sit amet consectetur.</p>
+        <button mat-button class="direction-button" (click)="openTable()">Movements</button>
+    </mat-drawer>
+
+    <div class="example-sidenav-content">
+        <button type="button" mat-button (click)="drawer.toggle()">
+            Directions
+        </button>
+
+    </div>
+
+</mat-drawer-container>
