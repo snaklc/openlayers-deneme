@@ -1,10 +1,7 @@
 .example-container {
     width: 500px;
     height: 100vh;
-    // border: 1px solid rgba(0, 0, 0, 0.5);
     background: transparent;
-  }
-  
   .example-sidenav-content {
     display: flex;
     align-items: center;
@@ -13,7 +10,7 @@
     top: 40px;
     right: -42px;
     transform: rotate(90deg);
-
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     button{
         color: white;
         background: #3e454d;
@@ -25,20 +22,33 @@
         }
     }
   }
-  
   .example-sidenav {
       background: #3e454d;
       color: white;
-      padding: 20px;
+      padding: 22px;
       box-shadow: none;
       border: none;
       button{
-          color:white;
-          background: #353b42;
-         border-radius: 10px;
-       }
+        color:white;
+        background: #353b42;
+        border-radius: 10px;
+      }
+      .movements{
+        padding: 10px;
+        color: white;
+        background: rgb(209, 208, 208);
+        border: 2px solid white;
+        border-radius: 30px;
+        width: auto;
+        height: auto;
+        text-align: center;
+        &:hover{
+          border: 2px solid #69a829;
+          cursor: pointer;
+        }
+      }
    }
-
   .add-border{
     border-bottom: 3px solid #69a829;
   }
+}
