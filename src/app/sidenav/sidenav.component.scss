@@ -36,14 +36,14 @@
       .movements{
         padding: 10px;
         color: white;
-        background: rgb(209, 208, 208);
-        border: 2px solid white;
+        background: #616161;
+        border: 2px solid transparent;
         border-radius: 30px;
         width: auto;
         height: auto;
         text-align: center;
         &:hover{
-          border: 2px solid #69a829;
+          border: 2px solid white;
           cursor: pointer;
         }
       }

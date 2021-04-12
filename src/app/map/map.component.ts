@@ -16,7 +16,8 @@ import { ElementRef } from '@angular/core';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { DataService } from '../services/data.service';
 import { doubleClick } from 'ol/events/condition';
-
+import Point from 'ol/geom/Point';
+import LineString from 'ol/geom/LineString';
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -44,6 +45,9 @@ export class MapComponent implements OnInit {
   constructor(public dialog: MatDialog, private dataService: DataService) {
     this.linesArray = dataService.lines;
   }
+  /**
+   * Esc ye basınca drawing ve modifying mode kapanması için
+   */
   @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
     this.drawingModeOff();
     this.modifyModeOff();
@@ -138,6 +142,7 @@ export class MapComponent implements OnInit {
       this.map.removeInteraction(this.select)
       console.log(this.linesArray)
     }
+
   }
   /**
    * Line çizmeye yarayan fonksiyon

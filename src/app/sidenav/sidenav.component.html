@@ -2,22 +2,22 @@
     <mat-drawer #drawer class="example-sidenav" mode="side" position="end">
         <p><strong>Directions</strong></p>
         <div class="btns">
-            <button mat-raised-button class="direction-button" (click)="openTable()">Cross Directons</button> &nbsp;
-            <button mat-raised-button class="direction-button" (click)="openTable()">Add New Cross</button>
-            <div style="margin-top: 10px">
+            <div style="margin-top: 10px" *ngIf="movementsArray !==null; else empty">
                 <ng-container class="movss" *ngFor="let movs of movementsArray">
                     <p class="movements">{{movs.startPoint}} -> {{movs.endPoint}}</p>
                 </ng-container>
             </div>
+            <ng-template #empty>
+                There is no directions.
+            </ng-template>
+            <button mat-raised-button class="direction-button" (click)="openTable()">Cross Directons</button> &nbsp;
+            <button mat-raised-button class="direction-button">Add New Cross</button>
         </div>
     </mat-drawer>
-
     <div class="example-sidenav-content">
         <button type="button" mat-button (click)="drawer.toggle()">
             <img src="assets/shuffle.svg">
             &nbsp;Directions
         </button>
-
     </div>
-
 </mat-drawer-container>
