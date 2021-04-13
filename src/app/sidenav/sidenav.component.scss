@@ -7,8 +7,8 @@
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 40px;
-    right: -42px;
+    top: 42px;
+    right: -50px;
     transform: rotate(90deg);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     button{
@@ -17,6 +17,10 @@
         outline: none;
         border: none;
         border-bottom: 3px solid transparent;
+        font-size: 19px;
+        padding: 8px 20px 8px 20px;
+        font-weight: 400;
+        border-radius: 0;
         &:hover{
             border-bottom: 3px solid #69a829;
         }
@@ -24,19 +28,20 @@
   }
   .example-sidenav {
       background: #3e454d;
+      width: 420px;
       color: white;
-      padding: 22px;
+      padding: 35px;
       box-shadow: none;
       border: none;
-      button{
-        color:white;
-        background: #353b42;
-        border-radius: 10px;
+      right: 3px;
+      
+      p{
+        text-align: center;
       }
       .movements{
         padding: 10px;
         color: white;
-        background: #616161;
+        background: #343a40;
         border: 2px solid transparent;
         border-radius: 30px;
         width: auto;
@@ -47,6 +52,19 @@
           cursor: pointer;
         }
       }
+      .btn-group{
+        display: flex;
+        justify-content: space-between;
+        width: 275px;
+        align-items: center;
+        padding-left: 35px;
+        button{
+          color:white;
+          background: #353b42;
+          border-radius: 10px;
+        }
+      }
+
    }
   .add-border{
     border-bottom: 3px solid #69a829;
