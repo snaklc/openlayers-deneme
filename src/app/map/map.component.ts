@@ -16,14 +16,14 @@ import { ElementRef } from '@angular/core';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { DataService } from '../services/data.service';
 import { doubleClick } from 'ol/events/condition';
-import Point from 'ol/geom/Point';
-import LineString from 'ol/geom/LineString';
+import { Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit {
+  @Output() newItemEvent = new EventEmitter<string>();
   @ViewChild('map', { static: true }) mapRef: ElementRef;
   imageLayer: ImageLayer;
   map: Map;
@@ -54,7 +54,10 @@ export class MapComponent implements OnInit {
   }
   ngOnInit(): void {
     this.initMap();
-
+  }
+  addNewItem(value: string) {
+    console.log('output', value)
+    this.newItemEvent.emit(value);
   }
   initMap() {
     const extent = [0, 0, 1060, 500]

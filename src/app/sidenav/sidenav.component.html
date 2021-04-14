@@ -1,18 +1,19 @@
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side" position="end">
         <p><strong>Selected Directions</strong></p>
-            <div style="margin-top: 10px" *ngIf="movementsArray !==null; else empty">
-                <ng-container class="movss" *ngFor="let movs of movementsArray">
-                    <p class="movements">{{movs.startPoint}} -> {{movs.endPoint}}</p>
-                </ng-container>
-            </div>
-            <ng-template #empty>
-                There is no selected directions.
-            </ng-template>
-            <div class="btn-group">
-                <button mat-raised-button class="direction-button" (click)="openTable()">Cross Directons</button>
-                <button mat-raised-button class="direction-button">Add New Cross</button>
-            </div>
+        <div style="margin-top: 10px" *ngIf="movementsArray !==null; else empty">
+            <ng-container class="movss" *ngFor="let movs of movementsArray">
+                <p class="movements" (mouseenter)="mouseEnter(movs.startPoint, movs.endPoint) ">{{movs.startPoint}} ->
+                    {{movs.endPoint}}</p>
+            </ng-container>
+        </div>
+        <ng-template #empty>
+            There is no selected directions.
+        </ng-template>
+        <div class="btn-group">
+            <button mat-raised-button class="direction-button" (click)="openTable()">Cross Directons</button>
+            <button mat-raised-button class="direction-button">Add New Cross</button>
+        </div>
     </mat-drawer>
     <div class="example-sidenav-content">
         <button type="button" mat-button (click)="drawer.toggle()">

@@ -28,4 +28,7 @@ export class SidenavComponent implements OnInit {
       }
     });
   }
+  mouseEnter(start, end) {
+
+  }
 }

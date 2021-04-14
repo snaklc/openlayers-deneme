@@ -11,7 +11,6 @@ const ELEMENT_ROW_DATA: IRow[] = [
   { name: 'WB' },
   { name: 'SB' },
 ];
-
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -25,7 +24,6 @@ export class TableComponent implements OnInit {
   dataSource;
   movementObj = { checked: false, startPoint: "", endPoint: "" };
   displayedColumns: string[] = ["S/F"];
-  // dataSource = ELEMENT_ROW_DATA;
   color = "black";
   constructor(private dataService: DataService) {
     this.dataService.lines.find((line) => {
@@ -38,15 +36,10 @@ export class TableComponent implements OnInit {
       console.log('dataSource', this.dataSource)
       this.displayedColumns.push(rowNames.name)
       console.log('displayColum', this.displayedColumns)
-
-
     })
   }
-
   ngOnInit(): void {
-    // console.log('map', this.mapComponent.linesArray)
   }
-
   onChecked(event, baslangic, bitis) {
     console.log(event, baslangic, bitis)
     this.movementObj = {
@@ -67,10 +60,7 @@ export class TableComponent implements OnInit {
     }
     this.movementsArray = this.getFilteredMovements(this.movementsArray)
     console.log('movements array', this.movementsArray)
-
-
   }
-
   getFilteredMovements(arr) {
     const filteredArray = arr.filter(item => item.checked === true)
     return filteredArray;
