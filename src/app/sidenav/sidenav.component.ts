@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TableComponent } from '../table/table.component';
+import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style';
 
 @Component({
   selector: 'app-sidenav',
@@ -10,10 +11,14 @@ import { TableComponent } from '../table/table.component';
 export class SidenavComponent implements OnInit {
   movementsArray = [];
   directions = true;
+  allFeatures = [];
+  @Input() vectorItem: any;
 
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    
+
   }
   showBorder = false;
   openTable() {
@@ -29,6 +34,18 @@ export class SidenavComponent implements OnInit {
     });
   }
   mouseEnter(start, end) {
+    this.allFeatures = this.vectorItem.getFeatures();
+    this.allFeatures.find((feature) =>{
+      if(feature.values_.name === start || feature.values_.name === end){
+        console.log(feature)
+        console.log(feature.getStyle().getStroke().getColor())
+        feature.getStyle().getStroke().setColor('blue')
+      }
+        console.log('feature',feature.getValues());
+        
+        
+    })
 
+    
   }
 }

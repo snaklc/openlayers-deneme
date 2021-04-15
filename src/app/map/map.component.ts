@@ -23,7 +23,7 @@ import { Output, EventEmitter } from '@angular/core';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit {
-  @Output() newItemEvent = new EventEmitter<string>();
+  @Output() vectorEvent = new EventEmitter<any>();
   @ViewChild('map', { static: true }) mapRef: ElementRef;
   imageLayer: ImageLayer;
   map: Map;
@@ -57,7 +57,7 @@ export class MapComponent implements OnInit {
   }
   addNewItem(value: string) {
     console.log('output', value)
-    this.newItemEvent.emit(value);
+    this.vectorEvent.emit(value);
   }
   initMap() {
     const extent = [0, 0, 1060, 500]

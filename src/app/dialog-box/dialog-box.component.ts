@@ -7,7 +7,6 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class DialogBoxComponent implements OnInit {
   lineName;
-  @Output() newItemEvent = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit(): void {
