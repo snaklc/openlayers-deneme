@@ -54,6 +54,7 @@ export class MapComponent implements OnInit {
   }
   ngOnInit(): void {
     this.initMap();
+
   }
   addNewItem(value: string) {
     console.log('output', value)
