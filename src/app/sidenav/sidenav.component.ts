@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TableComponent } from '../table/table.component';
 import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style';
+import Text from 'ol/style/Text';
 
 @Component({
   selector: 'app-sidenav',
@@ -36,24 +37,62 @@ export class SidenavComponent implements OnInit {
     this.allFeatures.find((feature) => {
       if (feature.values_.name === start || feature.values_.name === end) {
         const style = new Style({
-          // text: new Text({
-          //   text: feature.values_.name,
-          //   scale: 1.5,
-          //   font: 'Verdana',
-          //   padding: [-5, 5, -5, 8],
-          //   fill: new Fill({
-          //     color: 'green',
+          text: new Text({
+            text: feature.values_.name,
+            scale: 1.5,
+            font: 'Verdana',
+            padding: [-5, 5, -5, 8],
+            fill: new Fill({
+              color: 'green',
 
-          //   }),
-          //   backgroundFill: new Fill({
-          //     color: 'white'
-          //   }),
-          // }),
+            }),
+            backgroundFill: new Fill({
+              color: 'white'
+            }),
+          }),
           fill: new Fill({
             color: 'rgba(255, 255, 255, 0.2)',
           }),
           stroke: new Stroke({
             color: '#87da35',
+            width: 5,
+          }),
+          image: new CircleStyle({
+            radius: 7,
+            fill: new Fill({
+              color: '#87da35',
+            }),
+          }),
+        });
+        feature.setStyle(style)
+        // console.log(feature.getStyle().getStroke().getColor())
+        // feature.getStyle().getStroke().setColor('blue')
+      }
+    })
+  }
+  mouseLeave(start, end) {
+    this.allFeatures = this.vectorItem.getFeatures();
+    this.allFeatures.find((feature) => {
+      if (feature.values_.name === start || feature.values_.name === end) {
+        const style = new Style({
+          text: new Text({
+            text: feature.values_.name,
+            scale: 1.5,
+            font: 'Verdana',
+            padding: [-5, 5, -5, 8],
+            fill: new Fill({
+              color: 'green',
+
+            }),
+            backgroundFill: new Fill({
+              color: 'white'
+            }),
+          }),
+          fill: new Fill({
+            color: 'rgba(255, 255, 255, 0.2)',
+          }),
+          stroke: new Stroke({
+            color: 'white',
             width: 5,
           }),
           image: new CircleStyle({
