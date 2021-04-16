@@ -1,9 +1,9 @@
 <div class="container">
 	<div class="content">
 		<div class="box">
-			<app-map class="map" (vectorEvent)="addItem($event)"></app-map>
+			<app-map class="map" (vectorEvent)="addItem($event)" (mapEvent)="addMap($event)"></app-map>
 			<app-vehicle-type></app-vehicle-type>
 		</div>
 	</div>
-	<app-sidenav [vectorItem]="vector"></app-sidenav>
+	<app-sidenav [vectorItem]="vector"  [mapItem]="map"></app-sidenav>
 </div>

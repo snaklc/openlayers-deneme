@@ -13,13 +13,13 @@
         </ng-template>
         <div class="btn-group">
             <button mat-raised-button class="direction-button" (click)="openTable()">Cross Directons</button>
-            <button mat-raised-button class="direction-button">Add New Cross</button>
+            <button mat-raised-button class="direction-button" (click)="freeHandDraw()">Add New Cross</button>
         </div>
     </mat-drawer>
     <div class="example-sidenav-content">
         <button type="button" mat-button (click)="drawer.toggle()">
             <img src="assets/shuffle.svg">
             &nbsp;Directions
-        </button>
+        </button>   
     </div>
 </mat-drawer-container>

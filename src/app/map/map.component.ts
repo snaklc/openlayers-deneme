@@ -24,9 +24,10 @@ import { Output, EventEmitter } from '@angular/core';
 })
 export class MapComponent implements OnInit {
   @Output() vectorEvent = new EventEmitter<any>();
+  @Output() mapEvent = new EventEmitter<any>();
   @ViewChild('map', { static: true }) mapRef: ElementRef;
   imageLayer: ImageLayer;
-  map: Map;
+  mapSource: Map;
   selected: boolean = true;
   source;
   vector;
@@ -54,11 +55,12 @@ export class MapComponent implements OnInit {
   }
   ngOnInit(): void {
     this.initMap();
-
+    console.log('realmap',this.mapSource)
   }
-  addNewItem(value: string) {
-    console.log('output', value)
-    this.vectorEvent.emit(value);
+  addNewItem(vector,map) {
+    console.log('output', map)
+    this.vectorEvent.emit(vector);
+    this.mapEvent.emit(map);
   }
   initMap() {
     const extent = [0, 0, 1060, 500]
@@ -111,7 +113,7 @@ export class MapComponent implements OnInit {
     /**
      * Harita oluşturma
      */
-    this.map = new Map({
+    this.mapSource = new Map({
       layers: [this.imageLayer, this.vector],
       target: this.mapRef.nativeElement,
       controls: [], // zoomIn zoomOut buttonlarını gizler
@@ -131,7 +133,7 @@ export class MapComponent implements OnInit {
     this.select = selectClick; // ref to currently selected interaction
     console.log('selectType', this.select)
     if (this.select !== null) {
-      this.map.addInteraction(this.select);
+      this.mapSource.addInteraction(this.select);
       this.select.on('select', (e) => {
         if (e.selected.id_ !== null) {
           this.modifyLine();
@@ -143,7 +145,7 @@ export class MapComponent implements OnInit {
     else {
       this.modifyModeOff();
       // this.deleteModeOff();
-      this.map.removeInteraction(this.select)
+      this.mapSource.removeInteraction(this.select)
       console.log(this.linesArray)
     }
 
@@ -161,7 +163,7 @@ export class MapComponent implements OnInit {
         maxPoints: 2,
       })
       console.log('draw', this.draw)
-      this.map.addInteraction(this.draw);
+      this.mapSource.addInteraction(this.draw);
       // Çizim tamamlandıktan sonrası
       this.draw.on('drawend', (arg) => {
         this.drawingModeOff();
@@ -263,7 +265,7 @@ export class MapComponent implements OnInit {
         },
       })
       // Modify Interaction'ı haritaya ekledik
-      this.map.addInteraction(this.modify);
+      this.mapSource.addInteraction(this.modify);
       this.modify.on('modifyend', (event) => {
         //modified feature'ın koordinatları
         if (event.features.item(0) !== undefined) {
@@ -315,12 +317,12 @@ export class MapComponent implements OnInit {
     return result;
   }
   drawingModeOff() {
-    this.map.removeInteraction(this.draw);
+    this.mapSource.removeInteraction(this.draw);
     this.drawMode = false;
 
   }
   modifyModeOff() {
-    this.map.removeInteraction(this.modify);
+    this.mapSource.removeInteraction(this.modify);
     this.modifyMode = false;
   }
 }

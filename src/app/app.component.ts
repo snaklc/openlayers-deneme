@@ -6,11 +6,16 @@ import { Component, Input } from '@angular/core';
 })
 export class AppComponent {
   vector;
+  map;
   constructor() { }
 
   ngOnInit() {
   }
   addItem(newItem) {
     this.vector = newItem;
+  }
+  addMap(mapItem) {
+    console.log('mapaaa', mapItem)
+    this.map = mapItem;
   }
 }

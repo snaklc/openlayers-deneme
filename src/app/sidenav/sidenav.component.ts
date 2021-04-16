@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TableComponent } from '../table/table.component';
 import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style';
 import Text from 'ol/style/Text';
+import Draw from 'ol/interaction/Draw';
 
 @Component({
   selector: 'app-sidenav',
@@ -14,6 +15,7 @@ export class SidenavComponent implements OnInit {
   directions = true;
   allFeatures = [];
   @Input() vectorItem: any;
+  @Input() mapItem: any;
 
   constructor(public dialog: MatDialog) { }
 
@@ -31,6 +33,14 @@ export class SidenavComponent implements OnInit {
         this.movementsArray = result
       }
     });
+  }
+  freeHandDraw() {
+    let draw = new Draw({
+      source: this.vectorItem,
+      type: 'LineString',
+      freehand: true,
+    });
+    this.mapItem.addInteraction(draw);
   }
   mouseEnter(start, end) {
     this.allFeatures = this.vectorItem.getFeatures();
