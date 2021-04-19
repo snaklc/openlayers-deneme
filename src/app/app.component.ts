@@ -15,7 +15,6 @@ export class AppComponent {
     this.vector = newItem;
   }
   addMap(mapItem) {
-    console.log('mapaaa', mapItem)
     this.map = mapItem;
   }
 }

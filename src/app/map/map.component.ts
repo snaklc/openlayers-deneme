@@ -55,10 +55,8 @@ export class MapComponent implements OnInit {
   }
   ngOnInit(): void {
     this.initMap();
-    console.log('realmap',this.mapSource)
   }
   addNewItem(vector,map) {
-    console.log('output', map)
     this.vectorEvent.emit(vector);
     this.mapEvent.emit(map);
   }
@@ -131,7 +129,6 @@ export class MapComponent implements OnInit {
     });
 
     this.select = selectClick; // ref to currently selected interaction
-    console.log('selectType', this.select)
     if (this.select !== null) {
       this.mapSource.addInteraction(this.select);
       this.select.on('select', (e) => {
@@ -230,12 +227,10 @@ export class MapComponent implements OnInit {
   modifyLine() {
     this.modifyMode = !this.modifyMode
     if (this.modifyMode === true) {
-
-      var select = new Select({
-        // style: overlayStyle,
-      });
+      
       this.modify = new Modify({
         source: this.source,
+        features: this.select.getFeatures(),
         style: new Style({
           fill: new Fill({
             color: 'rgba(255, 255, 255, 0.2)',
@@ -253,7 +248,7 @@ export class MapComponent implements OnInit {
         }),
         insertVertexCondition: function () {
           // prevent new vertices to be added to the linestring
-          return !select
+          return !this.select
             .getFeatures()
             .getArray()
             .every(function (feature) {
@@ -297,6 +292,7 @@ export class MapComponent implements OnInit {
           if (element.getId() === selectedLineId) {
             //line'ı mapten kaldır
             this.source.removeFeature(element);
+            this.modifyModeOff();
             //line'ı dataserviceten sil
             this.linesArray = this.filterArrays(this.linesArray, selectedLineId)
           }
