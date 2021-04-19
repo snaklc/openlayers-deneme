@@ -6,7 +6,7 @@ import ImageStatic from 'ol/source/ImageStatic';
 import { getCenter } from 'ol/extent';
 import Projection from 'ol/proj/Projection';
 import { Vector as VectorSource } from 'ol/source';
-import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style';
+import { Circle as CircleStyle, Icon, Fill, Stroke, Style } from 'ol/style';
 import { Draw, Modify } from 'ol/interaction';
 import { MatDialog } from '@angular/material/dialog';
 import Text from 'ol/style/Text';
@@ -17,7 +17,7 @@ import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { DataService } from '../services/data.service';
 import { doubleClick } from 'ol/events/condition';
 import { Output, EventEmitter } from '@angular/core';
-@Component({
+import RegularShape from 'ol/style/RegularShape'; @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
@@ -56,7 +56,7 @@ export class MapComponent implements OnInit {
   ngOnInit(): void {
     this.initMap();
   }
-  addNewItem(vector,map) {
+  addNewItem(vector, map) {
     this.vectorEvent.emit(vector);
     this.mapEvent.emit(map);
   }
@@ -103,7 +103,7 @@ export class MapComponent implements OnInit {
         image: new CircleStyle({
           radius: 7,
           fill: new Fill({
-            color: 'white',
+            color: 'red',
           }),
         }),
       }),
@@ -126,6 +126,21 @@ export class MapComponent implements OnInit {
     // Lineları click ile seçmek ve modify etmek için
     var selectClick = new Select({
       condition: doubleClick,
+      style: new Style({
+        fill: new Fill({
+          color: 'rgba(255, 255, 255, 0.2)',
+        }),
+        stroke: new Stroke({
+          color: 'yellow',
+          width: 5,
+        }),
+        image: new CircleStyle({
+          radius: 10,
+          fill: new Fill({
+            color: 'red',
+          }),
+        }),
+      })
     });
 
     this.select = selectClick; // ref to currently selected interaction
@@ -134,6 +149,9 @@ export class MapComponent implements OnInit {
       this.select.on('select', (e) => {
         if (e.selected.id_ !== null) {
           this.modifyLine();
+        }
+        else {
+          this.modifyModeOff()
         }
         console.log('select', e)
         return e.selected;
@@ -145,6 +163,25 @@ export class MapComponent implements OnInit {
       this.mapSource.removeInteraction(this.select)
       console.log(this.linesArray)
     }
+    /**
+     * LineString üzerine geldiğinde cursor değişmesi için
+     */
+    // this.mapSource.on("pointermove", function (evt) {
+    //   var hit = this.forEachFeatureAtPixel(evt.pixel, (feature, layer) => {
+    //     if (feature.getGeometry().getType() === "LineString") {
+    //       return true;
+    //     }
+    //     else {
+    //       return false;
+    //     }
+    //   });
+    //   if (hit) {
+    //     this.getTargetElement().style.cursor = 'move';
+    //   }
+    //   else {
+    //     this.getTargetElement().style.cursor = '';
+    //   }
+    // });
 
   }
   /**
@@ -225,30 +262,32 @@ export class MapComponent implements OnInit {
   }
 
   modifyLine() {
-    this.modifyMode = !this.modifyMode
+    let select = new Select();
+    this.modifyMode = true;
     if (this.modifyMode === true) {
-      
       this.modify = new Modify({
         source: this.source,
         features: this.select.getFeatures(),
         style: new Style({
-          fill: new Fill({
-            color: 'rgba(255, 255, 255, 0.2)',
+          image: new RegularShape({
+            fill: new Fill({
+              color: 'red'
+            }),
+            points: 4,
+            radius1: 15,
+            radius2: 1
           }),
           stroke: new Stroke({
-            color: '#ffcc33',
-            width: 2,
+            color: 'blue',
+            width: 5
           }),
-          image: new CircleStyle({
-            radius: 7,
-            fill: new Fill({
-              color: '#ffcc33',
-            }),
-          }),
+          fill: new Fill({
+            color: 'green'
+          })
         }),
         insertVertexCondition: function () {
           // prevent new vertices to be added to the linestring
-          return !this.select
+          return !select
             .getFeatures()
             .getArray()
             .every(function (feature) {
