@@ -35,6 +35,7 @@ export class MapComponent implements OnInit {
   modify;
   drawMode = false;
   modifyMode = false;
+  // selectMode = false;
   lineCounter = 1;
   defaultlineName = 'line';
   coordinates;
@@ -124,7 +125,7 @@ export class MapComponent implements OnInit {
       }),
     });
     // Lineları click ile seçmek ve modify etmek için
-    var selectClick = new Select({
+    let selectClick = new Select({
       condition: doubleClick,
       style: new Style({
         fill: new Fill({
@@ -145,6 +146,7 @@ export class MapComponent implements OnInit {
 
     this.select = selectClick; // ref to currently selected interaction
     if (this.select !== null) {
+      // this.selectMode = true;
       this.mapSource.addInteraction(this.select);
       this.select.on('select', (e) => {
         if (e.selected.id_ !== null) {
@@ -166,22 +168,25 @@ export class MapComponent implements OnInit {
     /**
      * LineString üzerine geldiğinde cursor değişmesi için
      */
-    // this.mapSource.on("pointermove", function (evt) {
-    //   var hit = this.forEachFeatureAtPixel(evt.pixel, (feature, layer) => {
-    //     if (feature.getGeometry().getType() === "LineString") {
-    //       return true;
-    //     }
-    //     else {
-    //       return false;
-    //     }
-    //   });
-    //   if (hit) {
-    //     this.getTargetElement().style.cursor = 'move';
-    //   }
-    //   else {
-    //     this.getTargetElement().style.cursor = '';
-    //   }
-    // });
+    this.mapSource.on("pointermove", function (evt) {
+      var hit = this.forEachFeatureAtPixel(evt.pixel, (feature, layer) => {
+        if (feature.getGeometry().getType() === "LineString") {
+          return true;
+        }
+        else {
+          return false;
+        }
+      });
+      if (hit) {
+        this.getTargetElement().style.cursor = 'move';
+      }
+      else if (evt.dragging) {
+        this.getTargetElement().style.cursor = 'move';
+      } 
+      else {
+        this.getTargetElement().style.cursor = '';
+      }
+    });
 
   }
   /**
@@ -263,26 +268,15 @@ export class MapComponent implements OnInit {
 
   modifyLine() {
     let select = new Select();
-    this.modifyMode = true;
+    this.modifyMode = !this.modifyMode;
     if (this.modifyMode === true) {
       this.modify = new Modify({
         source: this.source,
         features: this.select.getFeatures(),
         style: new Style({
-          image: new RegularShape({
-            fill: new Fill({
-              color: 'red'
-            }),
-            points: 4,
-            radius1: 15,
-            radius2: 1
-          }),
           stroke: new Stroke({
-            color: 'blue',
+            color: 'transparent',
             width: 5
-          }),
-          fill: new Fill({
-            color: 'green'
           })
         }),
         insertVertexCondition: function () {
@@ -322,21 +316,25 @@ export class MapComponent implements OnInit {
     }
   }
   deleteLine() {
+    
     let selectedLine = this.select.features_.array_;
-    let selectedLineId = selectedLine[0].getId();
     if (selectedLine !== null) {
+      let selectedLineId = selectedLine[0].getId();
       let features = this.source.getFeatures();
       if (features != null && features.length > 0) {
         features.forEach(element => {
           if (element.getId() === selectedLineId) {
             //line'ı mapten kaldır
             this.source.removeFeature(element);
-            this.modifyModeOff();
             //line'ı dataserviceten sil
             this.linesArray = this.filterArrays(this.linesArray, selectedLineId)
+            this.modifyModeOff();
           }
         });
       }
+    }
+    else{
+      this.modifyModeOff();
     }
   }
   filterArrays(arr, selectedLineId) {
@@ -360,4 +358,8 @@ export class MapComponent implements OnInit {
     this.mapSource.removeInteraction(this.modify);
     this.modifyMode = false;
   }
+  // selectModeOff(){
+  //   this.mapSource.removeInteraction(this.select)
+  //   this.selectMode = false;
+  // }
 }
