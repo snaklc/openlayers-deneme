@@ -20,6 +20,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { PaginatorComponent } from './paginator/paginator.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     VehicleTypeComponent,
     MapComponent,
     SidenavComponent,
+    PaginatorComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatPaginatorModule
+
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
